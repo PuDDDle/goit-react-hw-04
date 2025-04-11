@@ -13,9 +13,9 @@ const App = () => {
   const [page, setPage] = useState(1);
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [totalPages, setTotalPages] = useState(null); // Track total pages
+  const [totalPages, setTotalPages] = useState(null);
 
-  const fetchImages = async (searchQuery, pageNumber) => {
+  const fetchImages = async (searchQuery, pageNumber, orientation) => {
     try {
       setError(null);
       setIsLoading(true);
@@ -27,6 +27,7 @@ const App = () => {
             query: searchQuery,
             page: pageNumber,
             per_page: 12,
+            orientation: orientation,
           },
           headers: {
             Authorization:
@@ -35,11 +36,10 @@ const App = () => {
         }
       );
 
-      setImages((prev) => [...prev, ...response.data.results]);
-      setTotalPages(response.data.total_pages); // Update total pages
+      setImages((prevImages) => [...prevImages, ...response.data.results]);
     } catch (error) {
       console.error("Error fetching images:", error);
-      setError("Не вдалося завантажити зображення. Спробуйте пізніше.");
+      setError("Не вдалося завантажити зображення.");
     } finally {
       setIsLoading(false);
     }
