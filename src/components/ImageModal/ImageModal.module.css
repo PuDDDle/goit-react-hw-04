@@ -1,59 +1,90 @@
-.Modal {
-    border: 1px solid aliceblue;
-    border-radius: 4px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    right: auto;
-    bottom: auto;
-    margin-right: -50%;
-    transform: translate(-50%, -50%);
-    width: 1080px;
-}
-
-
+/* Overlay з ефектом розмиття */
 .Overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(10, 10, 50, 0.9);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(8px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
 }
 
-.close {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    border-radius: 50%;
-    height: 24px;
-    width: 24px;
-    border: none;
-    background-color: rgba(150, 150, 150, 0.7);
+/* Модалка з "glassmorphism" */
+.Modal {
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 20px;
+  padding: 24px;
+  max-width: 700px;
+  width: 90%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: relative;
+  overflow: hidden;
+  animation: fadeIn 0.3s ease;
 }
 
+/* Картинка */
+.Modal img {
+  width: 100%;
+  height: auto;
+  border-radius: 16px;
+  object-fit: cover;
+  margin-bottom: 16px;
+}
+
+/* Нижня частина з описом і лайками */
 .bottom {
-    color: aliceblue;
-    background-color: #03053b;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 8px 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
 .descr {
-    max-width: 900px;
+  font-size: 16px;
+  color: #333;
+  flex: 1;
 }
 
 .likes {
-    font-size: 16px;
-    color: red;
-    text-align: center;
+  font-size: 14px;
+  color: #ff4d4d;
+  text-align: center;
+  font-weight: bold;
 }
 
-/* .closeIcon {
-    size: 36px;
-} */
+/* Кнопка закриття */
+.close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  color: #333;
+  font-size: 18px;
+  box-shadow: 4px 4px 12px #bebebe, -4px -4px 12px #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+.close:hover {
+  background: #d1d1d1;
+  box-shadow: inset 4px 4px 8px #bebebe, inset -4px -4px 8px #ffffff;
+}
+
+@keyframes fadeIn {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
